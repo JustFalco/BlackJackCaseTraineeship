@@ -1,13 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlackJackCaseTraineeship.Models
+﻿namespace BlackJackCaseTraineeship.Models
 {
-	public class Dealer : Player
+	public class Dealer
 	{
+		private List<Card> cardsInHand;
+		private bool busted;
+
+		public Dealer()
+		{
+			cardsInHand = new List<Card>();
+		}
+
+		public List<Card> Cards { get { return cardsInHand; } }
+
+		public bool IsBusted
+		{
+			get
+			{
+				return busted;
+			}
+			set
+			{
+				busted = value;
+			}
+		}
+
+		public void AddCard(Card card)
+		{
+			cardsInHand.Add(card);
+		}
+
+		public void ClearHand()
+		{
+			cardsInHand.Clear();
+		}
 
 		public int TotalCardAmount
 		{
@@ -23,30 +48,27 @@ namespace BlackJackCaseTraineeship.Models
 					}
 					amount += card.Value;
 				}
-				if (hasAce)
+
+				if (this.GetType() == typeof(Dealer))
 				{
-					amount += 10;
+					if (hasAce)
+					{
+						amount += 10;
+					}
 				}
+				else
+				{
+					if (hasAce)
+					{
+						if ((amount + 10) <= 21)
+						{
+							amount += 10;
+						}
+					}
+				}
+				
 				return amount;
 			}
-		}
-
-		public override string? ToString()
-		{
-			if(this.Cards.Count == 0)
-			{
-				return $"Dealer has no cards!";
-			}
-			else
-			{
-				string returnString = $"Dealer has \n";
-				foreach(Card card in this.Cards)
-				{
-					returnString = returnString + card.ToString() + "\n";
-				}
-				return returnString;
-			}
-			
 		}
 	}
 }

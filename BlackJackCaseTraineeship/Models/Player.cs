@@ -1,107 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlackJackCaseTraineeship.Models
+﻿namespace BlackJackCaseTraineeship.Models
 {
-	public class Player
+	public class Player : Dealer
 	{
-		private List<Card> cardsInHand;
+		
 		private string name;
 		private double bet;
-		private int totalBetAmound;
-		private bool busted;
+		private double totalBetAmound;
+
 
 		public Player()
 		{
-			cardsInHand = new List<Card>();
-		}
-
-		public bool IsBusted
-		{
-			get
-			{
-				return busted;
-			}
-			set
-			{
-				busted = value;
-			}
+			
 		}
 
 		public string Name
 		{
-			get
-			{
-				return name;
-			}
-			set
-			{
-				name = value;
-			}
-		}
-
-		public List<Card> Cards { get { return cardsInHand; } }
-
-		public void AddCard(Card card)
-		{
-			cardsInHand.Add(card);
-		}
-
-		public void ClearHand()
-		{
-			cardsInHand.Clear();
-		}
-
-		public int TotalCardAmount
-		{
-			get
-			{
-				int amount = 0;
-				bool hasAce = false;
-				foreach (Card card in cardsInHand)
-				{
-					if(card.Value == 1)
-					{
-						hasAce = true;
-					}
-					amount += card.Value;
-				}
-				if (hasAce)
-				{
-					if((amount + 10) <= 21)
-					{
-						amount += 10;
-					}
-				}
-				return amount;
-			}
+			get { return name; } 
+			set { name = value; }
 		}
 
 		public double Bet
 		{
-			get
-			{
-				return bet;
-			}
-			set
-			{
-				bet = value;
-			}
+			get { return bet; }
+			set { bet = value; }
+		}
+
+		public double TotalBetAmound
+		{
+			get { return totalBetAmound; }
+			set { totalBetAmound = value; }
 		}
 
 		public override string? ToString()
 		{
-			string returnString = $"Speler {name} heeft: \n";
-
-			foreach(Card card in cardsInHand)
+			//TODO kan ingekort worden
+			if (this.GetType() == typeof(Dealer))
 			{
-				returnString = returnString + card + "\n";
+				if (this.Cards.Count == 0)
+				{
+					return $"Dealer has no cards!";
+				}
+				else
+				{
+					string returnString = $"Dealer has \n";
+					foreach (Card card in this.Cards)
+					{
+						returnString = returnString + card.ToString() + "\n";
+					}
+					return returnString;
+				}
 			}
+			else
+			{
+				string returnString = $"Speler {name} heeft: \n";
 
-			return returnString;
+				foreach (Card card in Cards)
+				{
+					returnString = returnString + card + "\n";
+				}
+
+				return returnString;
+			}
 		}
 	}
 }

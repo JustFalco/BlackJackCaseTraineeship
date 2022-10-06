@@ -1,10 +1,5 @@
 ﻿using BlackJackCaseTraineeship.Models;
 using BlackJackCaseTraineeship.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlackJackCaseTraineeship.Controllers
 {
@@ -25,7 +20,7 @@ namespace BlackJackCaseTraineeship.Controllers
 		public void DealRound()
 		{
 			roundCount++;
-			foreach(Player player in playersInRound)
+			foreach (Player player in playersInRound)
 			{
 				DealPlayer(player);
 			}
@@ -42,7 +37,7 @@ namespace BlackJackCaseTraineeship.Controllers
 		public void DealDealer(Dealer dealer)
 		{
 			Card dealerCard = cardDeck.getCard(index);
-			if(roundCount == 2)
+			if (roundCount == 2)
 			{
 				dealerCard.IsHidden = true;
 			}
@@ -52,15 +47,15 @@ namespace BlackJackCaseTraineeship.Controllers
 
 		public void PlaceBets()
 		{
-			foreach(Player player in playersInGame)
+			foreach (Player player in playersInGame)
 			{
 				player.Bet = UserInput.QuestionInt($"Hoeveel wilt {player.Name} inleggen");
 			}
 		}
 
 		public void addPlayers(int amountOfPlayers)
-		{	
-			for(int i = 0; i < amountOfPlayers; i++)
+		{
+			for (int i = 0; i < amountOfPlayers; i++)
 			{
 				Player player = new Player();
 				player.Name = UserInput.QuestionString($"Naam speler {i + 1}");
@@ -71,7 +66,7 @@ namespace BlackJackCaseTraineeship.Controllers
 
 		public void AddPlayersToRound()
 		{
-			foreach(Player player in playersInGame)
+			foreach (Player player in playersInGame)
 			{
 				playersInRound.Add(player);
 			}
@@ -84,7 +79,7 @@ namespace BlackJackCaseTraineeship.Controllers
 
 		public void PrintHands()
 		{
-			foreach(Player player in playersInRound)
+			foreach (Player player in playersInRound)
 			{
 				Console.WriteLine(player);
 			}
@@ -101,9 +96,9 @@ namespace BlackJackCaseTraineeship.Controllers
 
 		public void CheckForPlayerWinAfterDealingCards()
 		{
-			foreach(Player p in playersInRound)
+			foreach (Player p in playersInRound)
 			{
-				if(p.TotalCardAmount == 21)
+				if (p.TotalCardAmount == 21)
 				{
 					Console.WriteLine($"{p.Name} heeft blackjack!");
 					p.Bet += p.Bet * 1.5;
@@ -114,18 +109,18 @@ namespace BlackJackCaseTraineeship.Controllers
 
 		public void DealerCardCheck()
 		{
-			while(dealer.TotalCardAmount < 17)
+			while (dealer.TotalCardAmount < 17)
 			{
 				DealDealer(dealer);
 			}
 
-			if(dealer.TotalCardAmount > 21)
+			if (dealer.TotalCardAmount > 21)
 			{
 				dealer.IsBusted = true;
 				Console.WriteLine("Dealer Busted!");
 			}
 
-			foreach(Card card in dealer.Cards)
+			foreach (Card card in dealer.Cards)
 			{
 				card.IsHidden = false;
 			}
@@ -133,16 +128,16 @@ namespace BlackJackCaseTraineeship.Controllers
 
 		public void CheckScores()
 		{
-			foreach(Player player in playersInRound)
+			foreach (Player player in playersInRound)
 			{
 				if (!player.IsBusted && !dealer.IsBusted)
 				{
-					if(player.TotalCardAmount > dealer.TotalCardAmount)
+					if (player.TotalCardAmount > dealer.TotalCardAmount)
 					{
 						player.Bet = player.Bet * 2;
 					}
 				}
-				else if(!player.IsBusted && dealer.IsBusted)
+				else if (!player.IsBusted && dealer.IsBusted)
 				{
 					player.Bet = player.Bet * 2;
 				}
@@ -152,7 +147,7 @@ namespace BlackJackCaseTraineeship.Controllers
 		public void ClearHands()
 		{
 			dealer.ClearHand();
-			foreach(Player player in playersInRound)
+			foreach (Player player in playersInRound)
 			{
 				player.IsBusted = false;
 				player.ClearHand();

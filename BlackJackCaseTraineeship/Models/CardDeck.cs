@@ -1,10 +1,4 @@
 ﻿using BlackJackCaseTraineeship.Utils;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlackJackCaseTraineeship.Models
 {
@@ -23,7 +17,7 @@ namespace BlackJackCaseTraineeship.Models
 					for (int j = 1; j <= 13; j++)
 					{
 						int value = j;
-						if(value > 10)
+						if (value > 10)
 						{
 							value = 10;
 						}
@@ -54,9 +48,9 @@ namespace BlackJackCaseTraineeship.Models
 		private void setCardTypes()
 		{
 			int count = 0;
-			foreach(Card card in deck)
+			foreach (Card card in deck)
 			{
-				if(count < 13)
+				if (count < 13)
 				{
 					card.Type = CardType.CLUBS;
 				}
@@ -64,22 +58,22 @@ namespace BlackJackCaseTraineeship.Models
 				{
 					card.Type = CardType.SPADES;
 				}
-				else if(count < 39)
+				else if (count < 39)
 				{
 					card.Type = CardType.HEART;
 				}
-				else if(count >= 39)
+				else if (count >= 39)
 				{
 					card.Type = CardType.DIAMONDS;
 				}
-						
+
 				count++;
 			}
 		}
 
 		public void PrintDeck()
 		{
-			foreach(Card card in deck)
+			foreach (Card card in deck)
 			{
 				Console.WriteLine(card);
 			}

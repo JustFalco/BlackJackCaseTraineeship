@@ -1,9 +1,4 @@
 ﻿using BlackJackCaseTraineeship.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlackJackCaseTraineeship.Models
 {
@@ -31,11 +26,11 @@ namespace BlackJackCaseTraineeship.Models
 				_value = value;
 			}
 		}
-		public CardType Type 
-		{ 
-			get 
-			{ 
-				return _type; 
+		public CardType Type
+		{
+			get
+			{
+				return _type;
 			}
 			set
 			{
