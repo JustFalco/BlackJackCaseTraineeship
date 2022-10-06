@@ -12,5 +12,11 @@ namespace BlackJackCaseTraineeship.Views
 		{
 			Console.WriteLine("Welkom bij BlackJack!");
 		}
+
+		public static void HitStay(string name)
+		{
+			Console.WriteLine($"{name} maak uw keuze: (h)it / (s)tay");
+			
+		}
 	}
 }

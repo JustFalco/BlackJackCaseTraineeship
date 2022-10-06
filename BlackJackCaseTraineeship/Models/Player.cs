@@ -10,12 +10,25 @@ namespace BlackJackCaseTraineeship.Models
 	{
 		private List<Card> cardsInHand;
 		private string name;
-		private int bet;
+		private double bet;
 		private int totalBetAmound;
+		private bool busted;
 
 		public Player()
 		{
 			cardsInHand = new List<Card>();
+		}
+
+		public bool IsBusted
+		{
+			get
+			{
+				return busted;
+			}
+			set
+			{
+				busted = value;
+			}
 		}
 
 		public string Name
@@ -67,7 +80,7 @@ namespace BlackJackCaseTraineeship.Models
 			}
 		}
 
-		public int Bet
+		public double Bet
 		{
 			get
 			{
@@ -81,11 +94,11 @@ namespace BlackJackCaseTraineeship.Models
 
 		public override string? ToString()
 		{
-			string returnString = $"Speler {name} heeft: ";
+			string returnString = $"Speler {name} heeft: \n";
 
 			foreach(Card card in cardsInHand)
 			{
-				returnString = returnString + "\n" + card;
+				returnString = returnString + card + "\n";
 			}
 
 			return returnString;

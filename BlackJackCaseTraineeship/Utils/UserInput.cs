@@ -32,5 +32,19 @@ namespace BlackJackCaseTraineeship.Utils
 			}
 			return answer.Value;
 		}
+
+		public static char QuestingChar(string question)
+		{
+			char? answer = null;
+			while (answer == null)
+			{
+				var str = QuestionString(question);
+				if (char.TryParse(str, out char a))
+				{
+					answer = a;
+				}
+			}
+			return answer.Value;
+		}
 	}
 }

@@ -12,6 +12,13 @@ namespace BlackJackCaseTraineeship.Models
 		private int _value;
 		private CardColor _color;
 		private CardType _type;
+		private bool hidden;
+
+		public bool IsHidden
+		{
+			get { return hidden; }
+			set { hidden = value; }
+		}
 
 		public int Value
 		{
@@ -50,6 +57,10 @@ namespace BlackJackCaseTraineeship.Models
 
 		public override string? ToString()
 		{
+			if (hidden)
+			{
+				return "Hidden card";
+			}
 			return $"{_color} {_type} met waarde {_value}";
 		}
 	}
