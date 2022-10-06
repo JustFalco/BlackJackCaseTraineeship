@@ -2,6 +2,7 @@
 using BlackJackCaseTraineeship.Utils;
 using BlackJackCaseTraineeship.Views;
 
+
 namespace BlackJackCaseTraineeship.Controllers
 {
 	public class Game
@@ -17,58 +18,53 @@ namespace BlackJackCaseTraineeship.Controllers
 		{
 			this.turnController = new TurnController();
 			this.gameController = new GameController();
-		}
 
+			int amoundOfPlayers = UserInput.QuestionInt("Aantal spelers");
+			int amoundOfDecks = UserInput.QuestionInt("Aantal speeldecks");
+
+			InitializeGame(amoundOfPlayers, amoundOfDecks);
+
+			while (IsGameActive)
+			{
+				//play turn
+			}
+		}
+		 
 		public void InitializeGame(int amoundOfPlayers, int amoundOfDecks)
 		{
 			//TODO InitializeGame Function
 			//initialize all players
-			this.playersInGame = initializePlayers(amoundOfPlayers);
-			//set player names
+			this.playersInGame = initializeList(playersInGame, amoundOfPlayers);
+			
+			//set player data
+			setPlayerData();
+
 			//initialize dealer
 			dealer = new Dealer();
 
 			//Set amound of decks
-			this.cardsInGame = initializeCardDecks(amoundOfDecks);
+			this.cardsInGame = initializeList(cardsInGame, amoundOfDecks);
 		}
 
-
-		//TODO refactor naar één initialize functie
-		private List<Player> initializePlayers(int amoundOfPlayers)
+		private List<T> initializeList<T>(List<T> itemList ,int amoundOfListItems) where T : new()
 		{
-			List<Player> playerList = new List<Player>();
-
-			for (int i = 0; i < amoundOfPlayers; i++)
-			{
-				playerList.Add(new Player());
-			}
-
-			return playerList;
-		}
-
-		private List<CardDeck> initializeCardDecks(int amoundOfCardDecks)
-		{
-			List<CardDeck> cards = new List<CardDeck>();
-
-			for (int i = 0; i < amoundOfCardDecks; i++)
-			{
-				cards.Add(new CardDeck());
-			}
-
-			return cards;
-		}
-
-		private List<T> initializeList<T>(int amoundOfListItems)
-		{
-			List<T> itemList = new List<T>();
-
 			for (int i = 0; i < amoundOfListItems; i++)
 			{
-				T obj = new T();
-				itemList.Add(obj);
+				itemList.Add(new T());
 			}
 
 			return itemList;
+		}
+
+		private void setPlayerData()
+		{
+			int playerIndex = 1;
+			foreach (Player player in playersInGame)
+			{
+				player.Name = UserInput.QuestionString($"Naam speler {playerIndex}");
+				player.Bet = UserInput.QuestionInt($"Hoeveel legt {player.Name} in");
+				playerIndex++;
+			}
 		}
 
 	}
