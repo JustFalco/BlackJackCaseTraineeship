@@ -4,6 +4,16 @@
 	{
 		public static string QuestionString(string question)
 		{
+			return QuestionString(question, false);
+		}
+
+		public static string QuestionString(string question, bool clearScreenBeforePrinting)
+		{
+			if (clearScreenBeforePrinting)
+			{
+				Console.Clear();
+			}
+			
 			Console.WriteLine($"{question}?");
 			string? answer = null;
 			while (answer == null)
@@ -15,8 +25,13 @@
 
 		public static int QuestionInt(string question)
 		{
+			return QuestionInt(question, int.MinValue, int.MaxValue);
+		}
+
+		public static int QuestionInt(string question, int min, int max)
+		{
 			int? answer = null;
-			while (answer == null)
+			while (answer == null || answer < min || answer > max)
 			{
 				var str = QuestionString(question);
 				if (int.TryParse(str, out int a))

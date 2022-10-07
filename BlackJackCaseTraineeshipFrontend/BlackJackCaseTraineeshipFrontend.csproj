@@ -8,19 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\**" />
-    <EmbeddedResource Remove="Views\**" />
-    <None Remove="Views\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Controllers\GameController.cs" />
-    <Compile Remove="Controllers\OldGame.cs" />
-    <Compile Remove="Utils\PlayerTypes.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BelastingdienstUtils\BelastingdienstUtils.csproj" />
+    <ProjectReference Include="..\BlackJackCaseTraineeship\BlackJackCaseTraineeship.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@ namespace BlackJackCaseTraineeship.Models
 	public class CardDeck
 	{
 		private List<Card> deck;
+		
 
 		public CardDeck()
 		{
@@ -83,6 +84,29 @@ namespace BlackJackCaseTraineeship.Models
 		{
 			var rnd = new Random();
 			deck = deck.OrderBy(item => rnd.Next()).ToList();
+		}
+
+		public CardDeck StackAllCardDecks(List<CardDeck> cardsInGame)
+		{
+			CardDeck allCardsStacked = new CardDeck();
+			foreach (CardDeck cardDeck in cardsInGame)
+			{
+				foreach (Card card in cardDeck.getCards)
+				{
+					allCardsStacked.deck.Add(card);
+				}
+			}
+
+			allCardsStacked.ShuffleDeck();
+
+			return allCardsStacked;
+		}
+
+		public Card? GetFirstActiveCardOnDeck()
+		{
+			Card card = this.deck.Where(card => card.IsActiveCard == true).First();
+			card.IsActiveCard = false;
+			return card;
 		}
 	}
 }

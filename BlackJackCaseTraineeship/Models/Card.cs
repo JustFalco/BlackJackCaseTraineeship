@@ -8,6 +8,7 @@ namespace BlackJackCaseTraineeship.Models
 		private CardColor _color;
 		private CardType _type;
 		private bool hidden;
+		private bool activeCard = true;
 
 		public bool IsHidden
 		{
@@ -48,6 +49,12 @@ namespace BlackJackCaseTraineeship.Models
 			{
 				_color = value;
 			}
+		}
+
+		public bool IsActiveCard
+		{
+			get { return activeCard; }
+			set { activeCard = value; }
 		}
 
 		public override string? ToString()

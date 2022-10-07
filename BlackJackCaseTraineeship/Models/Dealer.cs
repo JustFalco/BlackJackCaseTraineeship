@@ -2,15 +2,15 @@
 {
 	public class Dealer
 	{
-		private List<Card> cardsInHand;
+		private List<Hand> hands;
 		private bool busted;
 
 		public Dealer()
 		{
-			cardsInHand = new List<Card>();
+			hands = new List<Hand>();
 		}
 
-		public List<Card> Cards { get { return cardsInHand; } }
+		public List<Hand> Hands { get { return hands; } }
 
 		public bool IsBusted
 		{
@@ -24,51 +24,34 @@
 			}
 		}
 
-		public void AddCard(Card card)
+		public void BustPlayer()
 		{
-			cardsInHand.Add(card);
+			busted = true;
 		}
 
-		public void ClearHand()
+		public void ClearHands()
 		{
-			cardsInHand.Clear();
+			hands.Clear();
 		}
 
-		public int TotalCardAmount
+		public override string? ToString()
 		{
-			get
+			string returnString = "";
+			if (this.Hands.First().CardsInHand.Count == 0)
 			{
-				int amount = 0;
-				bool hasAce = false;
-				foreach (Card card in Cards)
-				{
-					if (card.Value == 1)
-					{
-						hasAce = true;
-					}
-					amount += card.Value;
-				}
-
-				if (this.GetType() == typeof(Dealer))
-				{
-					if (hasAce)
-					{
-						amount += 10;
-					}
-				}
-				else
-				{
-					if (hasAce)
-					{
-						if ((amount + 10) <= 21)
-						{
-							amount += 10;
-						}
-					}
-				}
-				
-				return amount;
+				returnString = "Dealer has no cards!";
 			}
+			else
+			{
+				returnString = $"Dealer has \n";
+				foreach (Card card in this.Hands.First().CardsInHand)
+				{
+					returnString = returnString + card.ToString() + "\n";
+				}
+				returnString = returnString + $"Totaal: {(IsBusted ? "busted" : this.Hands.First().TotalCardAmount)}\n";
+			}
+
+			return returnString;
 		}
 	}
 }
