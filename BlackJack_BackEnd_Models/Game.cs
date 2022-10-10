@@ -5,6 +5,7 @@ public class Game
 	private Dealer dealer;
 	private Player player;
 	private CardDeck cards;
+	private bool isActiveGame;
 
 	public Dealer Dealer
 	{
@@ -40,5 +41,23 @@ public class Game
 		{
 			cards = value;
 		}
+	}
+
+	public bool IsActiveGame
+	{
+		get
+		{
+			return isActiveGame;
+		}
+		set
+		{
+			isActiveGame = value;
+		}
+	}
+
+	public override string ToString()
+	{
+		string returnString = player + "\n" + dealer;
+		return returnString;
 	}
 }
