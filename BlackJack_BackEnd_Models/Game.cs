@@ -7,6 +7,14 @@ public class Game
 	private CardDeck cards;
 	private bool isActiveGame;
 
+	public Game()
+	{
+		dealer = new Dealer();
+		player = new Player();
+		cards = new CardDeck();
+		isActiveGame = true;
+	}
+
 	public Dealer Dealer
 	{
 		get

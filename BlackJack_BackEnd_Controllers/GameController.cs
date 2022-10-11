@@ -26,26 +26,30 @@ public class GameController
 
 	public TurnTypes? NextTurn(Game game)
 	{
-		if (game.Player.Hands.Count == 1 && game.Player.Hands.First().CardsInHand.Count == 0)
+		if (game == null)
+		{
+			throw new ArgumentNullException(nameof(game), "One or more objects in game are null");
+		}
+		// || game.Player == null || game.Cards == null || game.Dealer == null
+		if (game.Player.Hands.Count == 1 && game.Player.Hands.First().CardsInHand.Count == 0 && !game.Player.IsBusted)
 		{
 			return TurnTypes.DEALALLTURN;
 		}
-		else if (!game.Player.IsBusted && !game.Dealer.IsBusted)
+		if (!game.Player.IsBusted && !game.Dealer.IsBusted)
 		{
 			return TurnTypes.PLAYERTURN;
 		}
-		else if (game.Player.IsBusted && !game.Dealer.IsBusted)
+		if (game.Player.IsBusted && !game.Dealer.IsBusted)
 		{
 			return TurnTypes.DEALERTURN;
 		}
-		else if (game.Dealer.IsBusted || game.Dealer.GetScore >= 17)
+		if (game.Dealer.IsBusted || game.Dealer.GetScore >= 17)
 		{
 			return TurnTypes.FINALTURNS;
 		}
-		else
-		{
-			return null;
-		}
+		
+		return null;
+		
 	}
 
 	public Game DealAllTurn(Game game, UserController userController)
