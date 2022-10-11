@@ -35,11 +35,16 @@ public class Dealer : PersonInGame
 			hand.Add(card);
 		}
 
-		if (hand.HighestTotalAmound > 21)
+		if (hand.HighestTotalAmound >= 17)
 		{
 			hand.BustHand();
+		}
+
+		if (hand.HighestTotalAmound > 21)
+		{
 			Bust();
 		}
+
 	}
 	
 	public override void Stand()
