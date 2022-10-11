@@ -131,6 +131,21 @@ public class Hand
 		cardsInHand.Add(card);
 	}
 
+	public bool CanSplit()
+	{
+		return cardsInHand.Count == 2 && cardsInHand.First().Value == cardsInHand.Last().Value;
+	}
+
+	public bool CanDouble()
+	{
+		return this.CardsInHand.Count == 2 && this.TotalCardAmount <= 11;
+	}
+
+	public bool HasBlackJack()
+	{
+		return this.TotalCardAmount == 21;
+	}
+
 	public override string ToString()
 	{
 		string returnString = "\tHand has\n";

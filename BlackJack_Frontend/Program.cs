@@ -82,8 +82,6 @@ class Frontend
 		Console.Clear();
 		ShowHandsScreen();
 		Console.WriteLine(_gameController.CheckWinner(game, _userController));
-		
-
 	}
 
 	static void initializeControllers(UserController userController, GameController gameController)

@@ -23,21 +23,25 @@ namespace BlackJack_BackEnd_Controllers
 			//TODO make for multiple players
 			foreach (Hand hand in game.Player.Hands)
 			{
-				switch (decision)
+				if (!hand.IsBustedHand)
 				{
-					case Decision.HIT:
-						game.Player.Hit(hand, game.Cards.GetFirstActiveCardOnDeck());
-						break;
-					case Decision.STAND:
-						game.Player.Stand();
-						break;
-					case Decision.SPLIT:
-						game.Player.Split();
-						break;
-					case Decision.DOUBLE:
-						game.Player.Double();
-						break;
+					switch (decision)
+					{
+						case Decision.HIT:
+							game.Player.Hit(hand, game.Cards.GetFirstActiveCardOnDeck());
+							break;
+						case Decision.STAND:
+							game.Player.Stand();
+							break;
+						case Decision.SPLIT:
+							game.Player.Split(hand, game.Cards);
+							break;
+						case Decision.DOUBLE:
+							game.Player.Double(hand, game.Cards.GetFirstActiveCardOnDeck());
+							break;
+					}
 				}
+				
 			}
 
 			return game;
@@ -60,7 +64,15 @@ namespace BlackJack_BackEnd_Controllers
 		public bool CheckIfPlayerHandWonFromDealerHand(Hand playerHand, Dealer dealer)
 		{
 			//TODO uitbereiden
-			if (dealer.IsBusted)
+			if (playerHand.IsBustedHand)
+			{
+				return false;
+			}
+			else if (dealer.IsBusted || dealer.Hand.IsBustedHand)
+			{
+				return true;
+			}
+			else if (playerHand.TotalCardAmount > dealer.Hand.HighestTotalAmound)
 			{
 				return true;
 			}

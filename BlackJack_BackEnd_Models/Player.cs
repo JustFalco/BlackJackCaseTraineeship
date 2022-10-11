@@ -9,13 +9,14 @@ public class Player : PersonInGame
 
 	public override void Hit(Hand hand, Card card)
 	{
-		if (!IsBusted && hand.LeastTotalAmount < 21)
+		if (!hand.IsBustedHand && hand.LeastTotalAmount < 21)
 		{
 			hand.Add(card);
 		}
 		else
 		{
 			Bust();
+			hand.BustHand();
 		}
 
 		if (hand.LeastTotalAmount > 21)
@@ -30,14 +31,29 @@ public class Player : PersonInGame
 		Bust();
 	}
 
-	public void Double()
+	public void Double(Hand hand, Card card)
 	{
-
+		if (hand.CanDouble())
+		{
+			hand.Add(card);
+			Bust();
+			hand.BustHand();
+		}
 	}
 
-	public void Split()
+	public void Split(Hand hand, CardDeck cardDeck)
 	{
+		if (hand.CanSplit())
+		{
+			Hand newHand = new Hand();
+			newHand.Add(hand.CardsInHand.Last());
+			hand.CardsInHand.RemoveAt(1);
 
+			newHand.Add(cardDeck.GetFirstActiveCardOnDeck());
+			hand.Add(cardDeck.GetFirstActiveCardOnDeck());
+
+			this.Hands.Add(newHand);
+		}
 	}
 
 	public List<Hand> Hands
@@ -60,7 +76,7 @@ public class Player : PersonInGame
 			case 's':
 				decision = Decision.STAND;
 				break;
-			case 'b':
+			case 'd':
 				decision = Decision.DOUBLE;
 				break;
 			case 'p':
@@ -84,4 +100,5 @@ public class Player : PersonInGame
 		}
 		return returnString;
 	}
+
 }

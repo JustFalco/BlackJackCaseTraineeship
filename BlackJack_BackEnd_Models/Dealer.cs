@@ -30,17 +30,14 @@ public class Dealer : PersonInGame
 
 	public override void Hit(Hand hand, Card card)
 	{
-		if (!IsBusted && hand.HighestTotalAmound < 17)
+		if (!IsBusted && !hand.IsBustedHand && hand.HighestTotalAmound < 17)
 		{
 			hand.Add(card);
-		}
-		else
-		{
-			Bust();
 		}
 
 		if (hand.HighestTotalAmound > 21)
 		{
+			hand.BustHand();
 			Bust();
 		}
 	}

@@ -9,7 +9,7 @@ namespace BlackJack_BackEnd_Models
 	public abstract class PersonInGame
 	{
 		
-		private bool isBusted;
+		private bool isBusted = false;
 		private int score;
 
 		public int GetScore
@@ -28,17 +28,13 @@ namespace BlackJack_BackEnd_Models
 		{
 			get
 			{
+				//TODO check if busted here not in function
 				return isBusted;
 			}
 			set
 			{
 				isBusted = value;
 			}
-		}
-
-		public void GrabHand()
-		{
-
 		}
 
 		public abstract void Hit(Hand hand, Card card);

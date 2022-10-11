@@ -57,7 +57,7 @@ public class GameController
 
 	public Game DealerPlayTurn(Game game)
 	{
-		while (!game.Dealer.IsBusted)
+		while (!game.Dealer.IsBusted && !game.Dealer.Hand.IsBustedHand)
 		{
 			game.Dealer.Hit(game.Dealer.Hand, game.Cards.GetFirstActiveCardOnDeck());
 		}

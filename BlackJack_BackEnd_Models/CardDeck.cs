@@ -72,14 +72,6 @@ public class CardDeck
 		}
 	}
 
-	public void PrintDeck()
-	{
-		foreach (Card card in deck)
-		{
-			Console.WriteLine(card);
-		}
-	}
-
 	public void ShuffleDeck()
 	{
 		var rnd = new Random();
